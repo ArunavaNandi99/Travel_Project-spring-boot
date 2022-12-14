@@ -51,8 +51,13 @@ public class VacationController {
 	}
 	
 	public ResponseEntity<?> deleteVcationById(@PathVariable Long id){
+		Vacation vacation = vacationRepository.findById(id).get();
+		
+		if(vacation == null) {
+			throw new UserNotFoundException("id : "+id);
+		}
 		vacationRepository.deleteById(id);
-		return new ResponseEntity<>(HttpStr)
+		return new ResponseEntity<>("delete successfullt",HttpStatus.OK);
 		
 	}
 
